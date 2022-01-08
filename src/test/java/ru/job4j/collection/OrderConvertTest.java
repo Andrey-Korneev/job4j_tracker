@@ -3,6 +3,7 @@ package ru.job4j.collection;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,5 +17,16 @@ public class OrderConvertTest {
         orders.add(new Order("3sfe", "Dress"));
         HashMap<String, Order> map = OrderConvert.process(orders);
         assertThat(map.get("3sfe"), is(new Order("3sfe", "Dress")));
+    }
+
+    @Test
+    public void whenSeveralOrders() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order("3sfe", "Dress"));
+        orders.add(new Order("5fhg", "Jacket"));
+        orders.add(new Order("3sfe", "Dress"));
+        orders.add(new Order("5fhg", "Jacket"));
+        HashMap<String, Order> map = OrderConvert.process(orders);
+        assertThat(map.size(), is(2));
     }
 }
